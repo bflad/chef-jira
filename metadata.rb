@@ -1,3 +1,4 @@
+name              "template-cookbook"
 maintainer        "The Wharton School - The University of Pennsylvania"
 maintainer_email  "chef-admins@wharton.upenn.edu"
 license           "Apache 2.0"
