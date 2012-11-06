@@ -1,13 +1,15 @@
 module Helpers
-  module TemplateCookbook
-    require 'chef/mixin/shell_out'
-    include Chef::Mixin::ShellOut
+  module Jira
     include MiniTest::Chef::Assertions
     include MiniTest::Chef::Context
     include MiniTest::Chef::Resources
 
-    def ran_recipe?(recipe)
-      node.run_state[:seen_recipes].keys.include?(recipe)
+    def apache_service
+      service(case node['platform']
+              when "debian","ubuntu" then "apache2"
+              when "freebsd" then "apache22"
+              else "httpd"
+              end)
     end
   end
 end

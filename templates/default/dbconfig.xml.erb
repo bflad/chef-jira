@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ 
+<jira-database-config>
+  <name>defaultDS</name>
+  <delegator-name>default</delegator-name>
+  <% case @database["type"] -%>
+  <% when "mysql" -%>
+  <database-type>mysql</database-type>
+  <% when "postgresql" -%>
+  <database-type>postgres</database-type>
+  <schema-name>public</schema-name>
+  <% end -%>
+  <jdbc-datasource>
+    <% case @database["type"] -%>
+    <% when "mysql" -%>
+    <url>jdbc:mysql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["database"] %>?useUnicode=true&amp;characterEncoding=UTF8&amp;sessionVariables=storage_engine=InnoDB</url>
+    <driver-class>com.mysql.jdbc.Driver</driver-class>
+    <min-evictable-idle-time-millis>60000</min-evictable-idle-time-millis>
+    <pool-test-while-idle>true</pool-test-while-idle>
+    <time-between-eviction-runs-millis>300000</time-between-eviction-runs-millis>
+    <validation-query>select 1</validation-query>
+    <validation-query-timeout>3</validation-query-timeout>
+    <% when "postgresql" -%>
+    <url>jdbc:postgresql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["database"] %></url>
+    <driver-class>org.postgresql.Driver</driver-class>
+    <% end -%>
+    <username><%= @database["user"] %></username>
+    <password><%= @database["password"] %></password>
+    <pool-min-size>20</pool-min-size>
+    <pool-max-idle>20</pool-max-idle>
+    <pool-max-size>20</pool-max-size>
+    <pool-max-wait>30000</pool-max-wait>
+    <pool-remove-abandoned>true</pool-remove-abandoned>
+    <pool-remove-abandoned-timeout>300</pool-remove-abandoned-timeout>
+  </jdbc-datasource>
+</jira-database-config>

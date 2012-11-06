@@ -1,16 +1,17 @@
-name              "template-cookbook"
-maintainer        "The Wharton School - The University of Pennsylvania"
-maintainer_email  "chef-admins@wharton.upenn.edu"
+name              "jira"
+maintainer        "Brian Flad"
+maintainer_email  "bflad@wharton.upenn.edu"
 license           "Apache 2.0"
-description       "A cool description."
-version           "0.1.0"
-recipe            "template-cookbook", "Short description of template-cookbook default recipe."
-recipe            "template-cookbook::alternate", "Short description of template-cookbook::alternate recipe."
+description       "Installs/Configures Atlassian Jira."
+version           "0.0.1"
+recipe            "jira", "Installs/Configures Atlassian Jira."
+recipe            "jira::apache2", "Installs/Configures Atlassian Jira behind Apache2"
+recipe            "jira::upgrade", "Upgrades Atlassian Jira"
 
-%w{ apache2 logrotate }.each do |d|
-  depends d
+%w{ apache2 database java mysql mysql_connector postgresql }.each do |cb|
+  depends cb
 end
 
-%w{ redhat ubuntu }.each do |os|
+%w{ redhat }.each do |os|
   supports os
 end
