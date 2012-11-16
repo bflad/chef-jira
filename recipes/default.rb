@@ -156,4 +156,5 @@ end
 service "jira" do
   supports :status => true, :restart => true
   action [ :enable, :start ]
+  subscribes :restart, resources("java_ark[jdk]")
 end
