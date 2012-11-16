@@ -6,7 +6,7 @@ rmiPort$Long=8005
 app.jiraHome=<%= node['jira']['home_path'] %>
 app.install.service$Boolean=true
 existingInstallationDir=<%= node['jira']['install_path'] %>
-sys.confirmedUpdateInstallationString=<%= if node['jira']['update'] ? "true" : "false" %>
+sys.confirmedUpdateInstallationString=<%= node['jira']['update'] ? "true" : "false" %>
 sys.languageId=en
 sys.installationDir=<%= node['jira']['install_path'] %>
 executeLauncherAction$Boolean=true
