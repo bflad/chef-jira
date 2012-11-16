@@ -91,7 +91,7 @@ execute "Generating Self-Signed Java Keystore" do
   creates "#{node['jira']['home_path']}/.keystore"
 end
 
-if stash_database_info['type'] == "mysql"
+if jira_database_info['type'] == "mysql"
   include_recipe "mysql_connector"
   mysql_connector_j "#{node['jira']['install_path']}/lib"
 end
