@@ -93,7 +93,7 @@ end
 
 execute "Installing Jira #{node['jira']['version']}" do
   cwd Chef::Config[:file_cache_path]
-  command "atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin -q -varfile atlassian-jira-response.varfile"
+  command "./atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin -q -varfile atlassian-jira-response.varfile"
   creates node['jira']['install_path']
 end
 
