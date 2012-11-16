@@ -42,12 +42,11 @@ Third-Party Cookbooks
 * `node['jira']['install_backup']` - location of install directory backup
   during upgrade
 * `node['jira']['install_path']` - location to install Jira, defaults to
-  `/opt/atlassian-jira`
-* `node['jira']['run_user']` - user to run Jira, defaults to "jira"
+  `/opt/atlassian/jira`
 * `node['jira']['home_backup']` - location of home directory backup during
   upgrade
-* `node['jira']['home_path']` - home directory for Jira run_user, defaults to
-  `/home/#{node['jira']['run_user']}`
+* `node['jira']['home_path']` - home directory for Jira data, defaults to
+  `/var/atlassian/application-data/jira`
 
 ### Jira JVM Attributes
 
@@ -62,7 +61,7 @@ Third-Party Cookbooks
 ### Jira Tomcat Attributes
 
 * `node['jira']['tomcat']['port']` - port to run Tomcat HTTP, defaults to
-  7990
+  8080
 * `node['jira']['tomcat']['ssl_port']` - port to run Tomcat HTTPS, defaults
   to 8443
 

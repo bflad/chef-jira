@@ -103,21 +103,51 @@ template "#{Chef::Config[:file_cache_path]}/atlassian-jira-response.varfile" do
   mode "0644"
 end
 
-remote_file "#{Chef::Config[:file_cache_path]}/atlassian-jira-#{node['jira']['version']}-x86.bin" do
+remote_file "#{Chef::Config[:file_cache_path]}/atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin" do
   source    node['jira']['url']
   checksum  node['jira']['checksum']
-  mode      "0644"
+  mode      "0755"
   action    :create_if_missing
 end
 
 execute "Installing Jira #{node['jira']['version']}" do
   cwd Chef::Config[:file_cache_path]
-  command "atlassian-jira-#{node['jira']['version']}-x64.bin -q -varfile atlassian-jira-response.varfile"
-  creates "#{node['jira']['install_path']}/atlassian-jira"
+  command "atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin -q -varfile atlassian-jira-response.varfile"
+  creates node['jira']['install_path']
 end
 
 template "#{node['jira']['home_path']}/dbconfig.xml" do
   source "dbconfig.xml.erb"
+  owner  node['jira']['user']
+  mode   "0644"
+  variables :database => jira_database_info
+  notifies :restart, resources(:service => "jira"), :delayed
+end
+
+#template "#{node['jira']['home_path']}/jira-config.properties" do
+#  source "jira-config.properties.erb"
+#  owner  node['jira']['user']
+#  mode   "0644"
+#  notifies :restart, "service[stash]", :delayed
+#end
+
+template "#{node['jira']['install_path']}/bin/setenv.sh" do
+  source "setenv.sh.erb"
+  owner  node['jira']['user']
+  mode   "0755"
+  notifies :restart, resources(:service => "jira"), :delayed
+end
+
+template "#{node['jira']['install_path']}/conf/server.xml" do
+  source "server.xml.erb"
+  owner  node['jira']['user']
+  mode   "0640"
+  variables :tomcat => jira_tomcat_info
+  notifies :restart, resources(:service => "jira"), :delayed
+end
+
+template "#{node['jira']['install_path']}/conf/web.xml" do
+  source "web.xml.erb"
   owner  node['jira']['user']
   mode   "0644"
   notifies :restart, resources(:service => "jira"), :delayed

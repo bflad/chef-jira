@@ -1,3 +1,3 @@
-## v0.0.1
+## v0.1.0
 
-* Cookbook building and testing
+* Initial release
