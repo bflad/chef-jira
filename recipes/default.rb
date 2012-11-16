@@ -121,7 +121,7 @@ template "#{node['jira']['home_path']}/dbconfig.xml" do
   owner  node['jira']['user']
   mode   "0644"
   variables :database => jira_database_info
-  notifies :restart, resources(:service => "jira"), :delayed
+  notifies :restart, "service[jira]", :delayed
 end
 
 #template "#{node['jira']['home_path']}/jira-config.properties" do
@@ -135,7 +135,7 @@ template "#{node['jira']['install_path']}/bin/setenv.sh" do
   source "setenv.sh.erb"
   owner  node['jira']['user']
   mode   "0755"
-  notifies :restart, resources(:service => "jira"), :delayed
+  notifies :restart, "service[jira]", :delayed
 end
 
 template "#{node['jira']['install_path']}/conf/server.xml" do
@@ -143,14 +143,14 @@ template "#{node['jira']['install_path']}/conf/server.xml" do
   owner  node['jira']['user']
   mode   "0640"
   variables :tomcat => jira_tomcat_info
-  notifies :restart, resources(:service => "jira"), :delayed
+  notifies :restart, "service[jira]", :delayed
 end
 
 template "#{node['jira']['install_path']}/conf/web.xml" do
   source "web.xml.erb"
   owner  node['jira']['user']
   mode   "0644"
-  notifies :restart, resources(:service => "jira"), :delayed
+  notifies :restart, "service[jira]", :delayed
 end
 
 service "jira" do
