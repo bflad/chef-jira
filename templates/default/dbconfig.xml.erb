@@ -13,7 +13,7 @@
   <jdbc-datasource>
     <% case @database["type"] -%>
     <% when "mysql" -%>
-    <url>jdbc:mysql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["database"] %>?useUnicode=true&amp;characterEncoding=UTF8&amp;sessionVariables=storage_engine=InnoDB</url>
+    <url>jdbc:mysql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["name"] %>?useUnicode=true&amp;characterEncoding=UTF8&amp;sessionVariables=storage_engine=InnoDB</url>
     <driver-class>com.mysql.jdbc.Driver</driver-class>
     <min-evictable-idle-time-millis>60000</min-evictable-idle-time-millis>
     <pool-test-while-idle>true</pool-test-while-idle>
@@ -21,7 +21,7 @@
     <validation-query>select 1</validation-query>
     <validation-query-timeout>3</validation-query-timeout>
     <% when "postgresql" -%>
-    <url>jdbc:postgresql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["database"] %></url>
+    <url>jdbc:postgresql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["name"] %></url>
     <driver-class>org.postgresql.Driver</driver-class>
     <% end -%>
     <username><%= @database["user"] %></username>
