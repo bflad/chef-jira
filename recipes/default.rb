@@ -116,6 +116,12 @@ if jira_database_info['type'] == "mysql"
   mysql_connector_j "#{node['jira']['install_path']}/lib"
 end
 
+template "/etc/init.d/jira" do
+  source "jira.init.erb"
+  mode   "0755"
+  notifies :restart, "service[jira]", :delayed
+end
+
 template "#{node['jira']['home_path']}/dbconfig.xml" do
   source "dbconfig.xml.erb"
   owner  node['jira']['user']
@@ -154,7 +160,7 @@ template "#{node['jira']['install_path']}/conf/web.xml" do
 end
 
 service "jira" do
-  supports :status => true, :restart => true
+  supports :status => :true, :restart => :true
   action [ :enable, :start ]
   subscribes :restart, resources("java_ark[jdk]")
 end
