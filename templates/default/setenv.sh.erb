@@ -65,7 +65,7 @@ fi
 JAVA_OPTS="-Xms${JVM_MINIMUM_MEMORY} -Xmx${JVM_MAXIMUM_MEMORY} ${JAVA_OPTS} ${JVM_REQUIRED_ARGS} ${DISABLE_NOTIFICATIONS} ${JVM_SUPPORT_RECOMMENDED_ARGS} ${JVM_EXTRA_ARGS} ${JIRA_HOME_MINUSD}"
 
 # Perm Gen size needs to be increased if encountering OutOfMemoryError: PermGen problems. Specifying PermGen size is not valid on IBM JDKs
-JIRA_MAX_PERM_SIZE=="<%= node['jira']['jvm']['maximum_permgen'] %>"
+JIRA_MAX_PERM_SIZE="<%= node['jira']['jvm']['maximum_permgen'] %>"
 if [ -f "${PRGDIR}/permgen.sh" ]; then
     echo "Detecting JVM PermGen support..."
     . "${PRGDIR}/permgen.sh"
