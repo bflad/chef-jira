@@ -22,16 +22,17 @@
 # JIRA Linux service controller script
 APP=JIRA
 BASE=<%= node['jira']['install_path'] %>
+cd $BASE/bin
 
 function start {
     echo "Starting $APP"
-    $BASE/bin/start-jira.sh
+    ./start-jira.sh
     return $?
 }
 
 function stop {
     echo "Stopping $APP"
-    $BASE/bin/stop-jira.sh
+    ./stop-jira.sh
     return $?
 }
 
