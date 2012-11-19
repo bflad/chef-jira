@@ -137,6 +137,13 @@ end
 #  notifies :restart, "service[stash]", :delayed
 #end
 
+template "#{node['jira']['install_path']}/bin/permgen.sh" do
+  source "permgen.sh.erb"
+  owner  node['jira']['user']
+  mode   "0755"
+  notifies :restart, "service[jira]", :delayed
+end
+
 template "#{node['jira']['install_path']}/bin/setenv.sh" do
   source "setenv.sh.erb"
   owner  node['jira']['user']
