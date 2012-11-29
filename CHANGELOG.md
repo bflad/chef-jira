@@ -1,3 +1,7 @@
+## v0.1.2
+
+* Hopefully removed hard dependency on java_ark from java cookbook
+
 ## v0.1.1
 
 * Added permgen.sh template for custom JAVA_HOME, otherwise always defaults to
