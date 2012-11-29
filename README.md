@@ -129,7 +129,7 @@ Repeat for other Chef environments as necessary. Example:
   * `knife data bag create jira`
   * `knife data bag edit jira jira --secret-file=path/to/secret`
 * Add `recipe[jira::apache]` to your node's run list.
-* 
+
 ### Jira Upgrades
 
 * Update `node['jira']['version']` and `node['jira']['checksum']` attributes
