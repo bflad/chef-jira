@@ -27,7 +27,7 @@ Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
 Third-Party Cookbooks
 
-* mysql_connector (if using MySQL database): https://github.com/bflad/chef-mysql_connector
+* [mysql_connector](https://github.com/bflad/chef-mysql_connector) (if using MySQL database)
 
 ## Attributes
 
@@ -76,7 +76,7 @@ Third-Party Cookbooks
 ### Required Stash Data Bag
 
 Create a jira/jira encrypted data bag with the following information per
-Chef environment:
+Chef environment (_default if you're not using environments):
 
 _required:_
 * `['database']['type']` - "mysql" or "postgresql"
@@ -119,18 +119,17 @@ Repeat for other Chef environments as necessary. Example:
 ### Jira Installation
 
 * Create required encrypted data bag
-* Add `recipe[jira]` to your run_list.
+  * `knife data bag create jira`
+  * `knife data bag edit jira jira --secret-file=path/to/secret`
+* Add `recipe[jira]` to your node's run list.
 
-_PLEASE NOTE:_ Due to how Jira handles the setup process, you might
-still be asked for database information when initially setting up the
-server. I submitted [STASH-2687](https://jira.atlassian.com/browse/STASH-2687)
-to fix this.
-
-### Jira with Apache2 Frontend
+### Jira Installation with Apache 2 Frontend
 
 * Create required encrypted data bag
-* Add `recipe[jira::apache2]` to your run_list.
-
+  * `knife data bag create jira`
+  * `knife data bag edit jira jira --secret-file=path/to/secret`
+* Add `recipe[jira::apache]` to your node's run list.
+* 
 ### Jira Upgrades
 
 * Update `node['jira']['version']` and `node['jira']['checksum']` attributes
