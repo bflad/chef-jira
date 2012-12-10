@@ -29,6 +29,17 @@ Third-Party Cookbooks
 
 * [mysql_connector](https://github.com/bflad/chef-mysql_connector) (if using MySQL database)
 
+### JDK/JRE
+
+The Atlassian JIRA Linux installer will automatically configure a bundled JRE. If you wish to use your own JDK/JRE, with say the `java` cookbook, then as of this writing it must be Oracle and version 1.6 ([Supported Platforms](https://confluence.atlassian.com/display/JIRA/Supported+Platforms))
+
+Necessary configuration with `java` cookbook:
+* `node['java']['install_flavor'] = "oracle"`
+* `node['java']['oracle']['accept_oracle_download_terms'] = true`
+* `recipe[java]`
+
+A /ht to @seekely for the [documentation nudge](https://github.com/bflad/chef-jira/issues/2).
+
 ## Attributes
 
 * `node['jira']['version']` - Jira version to install (use
