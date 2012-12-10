@@ -38,7 +38,7 @@ Necessary configuration with `java` cookbook:
 * `node['java']['oracle']['accept_oracle_download_terms'] = true`
 * `recipe[java]`
 
-A /ht to @seekely for the [documentation nudge](https://github.com/bflad/chef-jira/issues/2).
+A /ht to [@seekely](https://github.com/seekely) for the [documentation nudge](https://github.com/bflad/chef-jira/issues/2).
 
 ## Attributes
 
