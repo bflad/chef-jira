@@ -20,8 +20,8 @@ Installs/Configures Atlassian Jira.
 Opscode Cookbooks (http://github.com/opscode-cookbooks/)
 
 * apache2 (if using Apache 2 as proxy)
-* database
-* java
+* database (if localhost database server)
+* java (if installing your own JDK/JRE)
 * mysql (if using MySQL database)
 * postgresql (if using Postgres database)
 
