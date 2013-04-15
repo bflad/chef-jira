@@ -2,7 +2,7 @@
 # Cookbook Name:: jira
 # Recipe:: apache2
 #
-# Copyright 2012
+# Copyright 2012-2013
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -19,10 +19,8 @@
 
 include_recipe "jira"
 
-node['apache']['listen_ports'] << node['jira']['apache2']['port'] unless node['apache']['listen_ports'].include?(node['jira']['apache2']['port'])
-node['apache']['listen_ports'] << node['jira']['apache2']['ssl']['port'] unless node['apache']['listen_ports'].include?(node['jira']['apache2']['ssl']['port'])
-
-node['apache']['default_site_enabled'] = false if node['jira']['apache2']['virtual_host_alias'] == node['fqdn']
+node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + [ node['jira']['apache2']['port'] ] unless node['apache']['listen_ports'].include?(node['jira']['apache2']['port'])
+node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + [ node['jira']['apache2']['ssl']['port'] ] unless node['apache']['listen_ports'].include?(node['jira']['apache2']['ssl']['port'])
 
 include_recipe "apache2"
 include_recipe "apache2::mod_proxy"
