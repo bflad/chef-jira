@@ -17,8 +17,6 @@
 # limitations under the License.
 #
 
-include_recipe "jira"
-
 node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + [ node['jira']['apache2']['port'] ] unless node['apache']['listen_ports'].include?(node['jira']['apache2']['port'])
 node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + [ node['jira']['apache2']['ssl']['port'] ] unless node['apache']['listen_ports'].include?(node['jira']['apache2']['ssl']['port'])
 

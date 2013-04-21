@@ -1,8 +1,8 @@
 #
 # Cookbook Name:: jira
-# Recipe:: default
+# Recipe:: configuration
 #
-# Copyright 2012
+# Copyright 2013, Brian Flad
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -17,16 +17,19 @@
 # limitations under the License.
 #
 
-platform = "windows" if node['platform_family'] == "windows"
-platform ||= "linux"
 settings = Jira.settings(node)
 
-include_recipe "jira::database" if settings['database']['host'] == "localhost"
-include_recipe "jira::#{platform}_#{node['jira']['install_type']}"
-
-unless node['jira']['install_type'].match("war")
-  include_recipe "jira::tomcat_configuration"
-  include_recipe "jira::apache2"
+template "#{node['jira']['home_path']}/dbconfig.xml" do
+  source "dbconfig.xml.erb"
+  owner  node['jira']['user']
+  mode   "0644"
+  variables :database => settings['database']
+  notifies :restart, "service[jira]", :delayed
 end
 
-include_recipe "jira::configuration"
+#template "#{node['jira']['home_path']}/jira-config.properties" do
+#  source "jira-config.properties.erb"
+#  owner  node['jira']['user']
+#  mode   "0644"
+#  notifies :restart, "service[stash]", :delayed
+#end

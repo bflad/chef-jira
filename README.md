@@ -2,13 +2,15 @@
 
 ## Description
 
-Installs/Configures Atlassian Jira.
+Installs/Configures Atlassian JIRA. Please see [COMPATIBILITY.md](COMPATIBILITY.md) for more information about JIRA releases that are tested and supported by this cookbook and its versions.
 
 ## Requirements
 
 ### Platforms
 
-* RedHat 6.3
+* CentOS 6
+* RedHat 6
+* Ubuntu 12.04
 
 ### Databases
 
@@ -17,17 +19,20 @@ Installs/Configures Atlassian Jira.
 
 ### Cookbooks
 
-Opscode Cookbooks (http://github.com/opscode-cookbooks/)
+Required [Opscode Cookbooks](https://github.com/opscode-cookbooks/)
 
-* apache2 (if using Apache 2 as proxy)
-* database (if localhost database server)
-* java (if installing your own JDK/JRE)
-* mysql (if using MySQL database)
-* postgresql (if using Postgres database)
+* [apache2](https://github.com/opscode-cookbooks/apache2) (if using apache2 recipe)
+* [database](https://github.com/opscode-cookbooks/database) (if using database recipe)
+* [mysql](https://github.com/opscode-cookbooks/mysql) (if using database recipe with MySQL)
+* [postgresql](https://github.com/opscode-cookbooks/postgresql) (if using database recipe with Postgres)
 
-Third-Party Cookbooks
+Required Third-Party Cookbooks
 
 * [mysql_connector](https://github.com/bflad/chef-mysql_connector) (if using MySQL database)
+
+Suggested [Opscode Cookbooks](https://github.com/opscode-cookbooks/)
+
+* [java](https://github.com/opscode-cookbooks/java)
 
 ### JDK/JRE
 
@@ -42,70 +47,96 @@ A /ht to [@seekely](https://github.com/seekely) for the [documentation nudge](ht
 
 ## Attributes
 
-* `node['jira']['version']` - Jira version to install (use
-  `recipe[jira::upgrade]` to upgrade to version defined)
-* `node['jira']['url']` - URL for Jira installer .bin
-* `node['jira']['checksum']` - SHA256 checksum for Jira installer .tar.gz
-* `node['jira']['backup_home']` - backup home directory during upgrade,
-  defaults to true
-* `node['jira']['backup_install']` - backup install directory during upgrade,
-  defaults to true
-* `node['jira']['install_backup']` - location of install directory backup
-  during upgrade
-* `node['jira']['install_path']` - location to install Jira, defaults to
-  `/opt/atlassian/jira`
-* `node['jira']['home_backup']` - location of home directory backup during
-  upgrade
-* `node['jira']['home_path']` - home directory for Jira data, defaults to
-  `/var/atlassian/application-data/jira`
+These attributes are under the `node['jira']` namespace.
 
-### Jira JVM Attributes
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+arch | architecture for JIRA installer - "x64" or "x32" | String | auto-detected (see attributes/default.rb)
+backup_home | backup home directory during upgrade | Boolean | true
+backup_install | backup install directory during upgrade | Boolean | true
+checksum | SHA256 checksum for JIRA install | String | auto-detected (see attributes/default.rb)
+home_backup | home backup location | String | /tmp/atlassian-jira-home-backup.tgz
+home_path | home directory for JIRA | String | /var/atlassian/application-data/jira
+install_backup | install backup location | String | /tmp/atlassian-jira-backup.tgz
+install_path | location to install JIRA | String | /opt/atlassian/jira
+install_type | JIRA install type - "installer", "standalone", "war" | String | installer
+url_base | URL base for JIRA install | String | http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira
+url | URL for JIRA install | String | auto-detected (see attributes/default.rb)
+user | user running JIRA | String | jira
+version | Confluence version to install | String | 5.2
 
-* `node['jira']['jvm']['minimum_memory']` - defaults to "256m"
-* `node['jira']['jvm']['maximum_memory']` - defaults to "768m"
-* `node['jira']['jvm']['maximum_permgen']` - defaults to "256m"
-* `node['jira']['jvm']['java_opts']` - additional JAVA_OPTS to be passed to
-  Jira JVM during startup
-* `node['jira']['jvm']['support_args']` - additional JAVA_OPTS recommended by
-  Atlassian support for Jira JVM during startup
+### JIRA Database Attributes
 
-### Jira Tomcat Attributes
+All of these `node['jira']['database']` attributes are overridden by `jira/jira` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
-* `node['jira']['tomcat']['port']` - port to run Tomcat HTTP, defaults to
-  8080
-* `node['jira']['tomcat']['ssl_port']` - port to run Tomcat HTTPS, defaults
-  to 8443
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+host | FQDN or "localhost" (localhost automatically installs `['database']['type']` server in default recipe) | String | localhost
+name | JIRA database name | String | jira
+password | JIRA database user password | String | changeit
+port | JIRA database port | Fixnum | 3306
+type | JIRA database type - "mysql" or "postgresql" | String | mysql
+user | JIRA database user | String | jira
+
+### JIRA JVM Attributes
+
+These attributes are under the `node['jira']['jvm']` namespace.
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+minimum_memory | JVM minimum memory | String | 512m
+maximum_memory | JVM maximum memory | String | 768m
+maximum_permgen | JVM maximum PermGen memory | String | 256m
+java_opts | additional JAVA_OPTS to be passed to JIRA JVM during startup | String | ""
+support_args | additional JAVA_OPTS recommended by Atlassian support for JIRA JVM during startup | String | ""
+
+### JIRA Tomcat Attributes
+
+These attributes are under the `node['jira']['tomcat']` namespace.
+
+Any `node['confluence']['tomcat']['key*']` attributes are overridden by `confluence/confluence` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+
+Attribute | Description | Type | Default
+----------|-------------|------|--------
+keyAlias | Tomcat SSL keystore alias | String | tomcat
+keystoreFile | Tomcat SSL keystore file - will automatically generate self-signed keystore file if left as default | String | `#{node['jira']['home_path']}/.keystore`
+keystorePass | Tomcat SSL keystore passphrase | String | changeit
+port | Tomcat HTTP port | Fixnum | 8080
+ssl_port | Tomcat HTTPS port | Fixnum | 8443
 
 ## Recipes
 
-* `recipe[jira]` Installs Atlassian Jira with built-in Tomcat
-* `recipe[jira::apache2]` Installs above with Apache 2 proxy (ports 80/443)
-* `recipe[jira::upgrade]` Upgrades Atlassian Jira
+* `recipe[jira]` Installs/configures Atlassian JIRA
+* `recipe[jira::apache2]` Installs/configures Apache 2 as proxy (ports 80/443)
+* `recipe[jira::database]` Installs/configures MySQL/Postgres server, database, and user for JIRA
+* `recipe[jira::linux_installer]` Installs/configures JIRA via Linux installer"
+* `recipe[jira::linux_standalone]` Installs/configures JIRA via Linux standalone archive"
+* `recipe[jira::linux_war]` Deploys JIRA WAR on Linux"
+* `recipe[jira::tomcat_configuration]` Configures JIRA's built-in Tomcat
+* `recipe[jira::upgrade]` Upgrades Atlassian JIRA
+* `recipe[jira::windows_installer]` Installs/configures JIRA via Windows installer"
+* `recipe[jira::windows_standalone]` Installs/configures JIRA via Windows standalone archive"
+* `recipe[jira::windows_war]` Deploys JIRA WAR on Windows"
 
 ## Usage
 
-### Required Stash Data Bag
+### JIRA Server Data Bag
 
-Create a jira/jira encrypted data bag with the following information per
-Chef environment (_default if you're not using environments):
+For securely overriding attributes on Hosted Chef, create a `jira/jira` encrypted data bag with the model below. Chef Solo can override the same attributes with a `jira/jira` unencrypted data bag of the same information.
 
 _required:_
 * `['database']['type']` - "mysql" or "postgresql"
-* `['database']['host']` - FQDN or "localhost" (localhost automatically
-  installs `['database']['type']` server)
-* `['database']['name']` - Name of Jira database
-* `['database']['user']` - Jira database username
-* `['database']['password']` - Jira database username password
+* `['database']['host']` - FQDN or "localhost" (localhost automatically installs `['database']['type']` server)
+* `['database']['name']` - Name of JIRA database
+* `['database']['user']` - JIRA database username
+* `['database']['password']` - JIRA database username password
 
 _optional:_
-* `['database']['port']` - Database port, defaults to standard database port for
-  `['database']['type']`
-* `['tomcat']['keyAlias']` - Tomcat HTTPS Java Keystore keyAlias, defaults to
-  self-signed certifcate
+* `['database']['port']` - Database port, defaults to standard database port for `['database']['type']`
+* `['tomcat']['keyAlias']` - Tomcat HTTPS Java Keystore keyAlias, defaults to self-signed certifcate
 * `['tomcat']['keystoreFile']` - Tomcat HTTPS Java Keystore keystoreFile,
   defaults to self-signed certificate
-* `['tomcat']['keystorePass']` - Tomcat HTTPS Java Keystore keystorePass,
-  defaults to self-signed certificate
+* `['tomcat']['keystorePass']` - Tomcat HTTPS Java Keystore keystorePass, defaults to self-signed certificate
 
 Repeat for other Chef environments as necessary. Example:
 
@@ -127,36 +158,68 @@ Repeat for other Chef environments as necessary. Example:
       }
     }
 
-### Jira Installation
+### JIRA Installation
 
-* Create required encrypted data bag
+The simplest method is via the default recipe, which uses `node['jira']['install_type']` to determine best method.
+
+* Optionally (un)encrypted data bag or set attributes
   * `knife data bag create jira`
   * `knife data bag edit jira jira --secret-file=path/to/secret`
 * Add `recipe[jira]` to your node's run list.
 
-### Jira Installation with Apache 2 Frontend
+### Custom JIRA Configurations
 
-* Create required encrypted data bag
+Using individual recipes, you can use this cookbook to configure JIRA to fit your environment.
+
+* Optionally (un)encrypted data bag or set attributes
   * `knife data bag create jira`
   * `knife data bag edit jira jira --secret-file=path/to/secret`
-* Add `recipe[jira::apache]` to your node's run list.
+* Add individual recipes to your node's run list.
 
-### Jira Upgrades
+### JIRA Upgrades
 
 * Update `node['jira']['version']` and `node['jira']['checksum']` attributes
 * Add `recipe[jira::upgrade]` to your run_list, such as:
   `knife node run_list add NODE_NAME "recipe[jira::upgrade]"`
   It will automatically remove itself from the run_list after completion.
 
+## Testing and Development
+
+Here's how you can quickly get testing or developing against the cookbook thanks to [Vagrant](http://vagrantup.com/) and [Berkshelf](http://berkshelf.com/).
+
+    gem install bundler --no-ri --no-rdoc
+    git clone git://github.com/bflad/chef-jira.git
+    cd chef-jira
+    bundle install
+    bundle exec vagrant up BOX # BOX being centos6 or ubuntu1204
+
+You may need to add the following hosts entries:
+
+* 192.168.50.10 jira-centos-6
+* 192.168.50.11 jira-ubuntu-1204
+
+The running JIRA server is accessible from the host machine:
+
+CentOS 6 Box:
+* Web UI: https://192.168.50.10/
+
+Ubuntu 12.04 Box:
+* Web UI: https://192.168.50.11/
+
+You can then SSH into the running VM using the `vagrant ssh` command.
+The VM can easily be stopped and deleted with the `vagrant destroy`
+command. Please see the official [Vagrant documentation](http://vagrantup.com/v1/docs/commands.html)
+for a more in depth explanation of available commands.
+
 ## Contributing
 
-Please use standard Github issues/pull requests.
+Please use standard Github issues/pull requests and if possible, in combination with testing on the Vagrant boxes.
 
 ## License and Author
-      
-Author:: Brian Flad (<bflad@wharton.upenn.edu>)
 
-Copyright:: 2012
+Author:: Brian Flad (<bflad417@gmail.com>)
+
+Copyright:: 2012-2013
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
