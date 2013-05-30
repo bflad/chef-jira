@@ -1,3 +1,7 @@
+## 1.1.0
+
+* Bump default JIRA version to 6.0.1
+
 ## 1.0.0
 
 * Split default recipe into individual recipes
