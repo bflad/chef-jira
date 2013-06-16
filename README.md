@@ -190,8 +190,9 @@ Here's how you can quickly get testing or developing against the cookbook thanks
     gem install bundler --no-ri --no-rdoc
     git clone git://github.com/bflad/chef-jira.git
     cd chef-jira
-    bundle install
-    bundle exec vagrant up BOX # BOX being centos6 or ubuntu1204
+    vagrant plugin install vagrant-berkshelf
+    vagrant plugin install vagrant-omnibus
+    vagrant up BOX # BOX being centos6 or ubuntu1204
 
 You may need to add the following hosts entries:
 
