@@ -11,8 +11,8 @@ Vagrant.configure("2") do |config|
   config.omnibus.chef_version = :latest
 
   config.vm.define :centos6 do |centos6|
-    centos6.vm.box      = 'opscode-centos-6.3'
-    centos6.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.3_provisionerless.box'
+    centos6.vm.box      = 'opscode-centos-6.4'
+    centos6.vm.box_url  = 'https://opscode-vm.s3.amazonaws.com/vagrant/opscode_centos-6.4_provisionerless.box'
     centos6.vm.hostname = 'jira-centos-6'
     centos6.vm.network :private_network, ip: '192.168.50.10'
   end
