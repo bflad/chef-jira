@@ -1,3 +1,7 @@
+## 1.3.0
+
+* Bump default JIRA version to 6.0.5
+
 ## 1.2.0
 
 * Bump default JIRA version to 6.0.2
