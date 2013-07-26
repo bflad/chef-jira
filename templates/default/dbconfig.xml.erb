@@ -9,6 +9,9 @@
   <% when "postgresql" -%>
   <database-type>postgres</database-type>
   <schema-name>public</schema-name>
+  <% when "mssql" -%>
+  <database-type>mssql</database-type>
+  <schema-name>dbo</schema-name>
   <% end -%>
   <jdbc-datasource>
     <% case @database["type"] -%>
@@ -23,6 +26,13 @@
     <% when "postgresql" -%>
     <url>jdbc:postgresql://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["name"] %></url>
     <driver-class>org.postgresql.Driver</driver-class>
+    <% when "mssql" -%>
+    <url>jdbc:jtds:sqlserver://<%= @database["host"] %>:<%= @database["port"] %>/<%= @database["name"] %></url>
+    <driver-class>net.sourceforge.jtds.jdbc.Driver</driver-class>
+    <validation-query>select 1</validation-query>
+    <min-evictable-idle-time-millis>60000</min-evictable-idle-time-millis>
+    <time-between-eviction-runs-millis>300000</time-between-eviction-runs-millis> 
+    <pool-test-while-idle>true</pool-test-while-idle>
     <% end -%>
     <username><%= @database["user"] %></username>
     <password><%= @database["password"] %></password>
