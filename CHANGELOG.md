@@ -1,3 +1,7 @@
+## 1.4.0
+
+* Initial Microsoft SQL Server support
+
 ## 1.3.0
 
 * Bump default JIRA version to 6.0.5

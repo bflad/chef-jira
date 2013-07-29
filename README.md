@@ -14,6 +14,7 @@ Installs/Configures Atlassian JIRA. Please see [COMPATIBILITY.md](COMPATIBILITY.
 
 ### Databases
 
+* Microsoft SQL Server
 * MySQL
 * Postgres
 
@@ -75,7 +76,7 @@ host | FQDN or "localhost" (localhost automatically installs `['database']['type
 name | JIRA database name | String | jira
 password | JIRA database user password | String | changeit
 port | JIRA database port | Fixnum | 3306
-type | JIRA database type - "mysql" or "postgresql" | String | mysql
+type | JIRA database type - "mssql", "mysql", or "postgresql" | String | mysql
 user | JIRA database user | String | jira
 
 ### JIRA JVM Attributes
@@ -125,7 +126,7 @@ ssl_port | Tomcat HTTPS port | Fixnum | 8443
 For securely overriding attributes on Hosted Chef, create a `jira/jira` encrypted data bag with the model below. Chef Solo can override the same attributes with a `jira/jira` unencrypted data bag of the same information.
 
 _required:_
-* `['database']['type']` - "mysql" or "postgresql"
+* `['database']['type']` - "mssql", "mysql", or "postgresql"
 * `['database']['host']` - FQDN or "localhost" (localhost automatically installs `['database']['type']` server)
 * `['database']['name']` - Name of JIRA database
 * `['database']['user']` - JIRA database username
