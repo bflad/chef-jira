@@ -48,6 +48,7 @@ when "windows"
     when "6.0.3"; node['jira']['arch'] == "x64" ? "a50ba6428c8692948a26ff1098538f7c4968b9b55d801d6a810b6a80228ad1d8" : "819626e6882dd2fd3aa763d1ae765783a34a20e51fb71d6b0438b05729b9541d"
     when "6.0.4"; node['jira']['arch'] == "x64" ? "8a990fa09cb8c7952195a0adb3a1139cfce3f4a59ed0c97bf9d693091ec3dd6e" : "24067f9cc9629e4abc69d53be870c91a40246dd15c8313464053c02b548dbcbc"
     when "6.0.5"; node['jira']['arch'] == "x64" ? "470de9a8a3f14c9cf5cde0b950c7cdfc4019c9cb55f1566ada136a2b8737a7c5" : "565385605da0fa5e4158e1e42cedcb2bda3a40f18732594f077a7a921ac86354"
+    when "6.0.6"; node['jira']['arch'] == "x64" ? "0c62209c7564b64b6cbd176804169959df13817a8d2e0285583ba35bc4131541" : "95e692b444b97c69c18326318d76b3452aaa04b6a4883a16aa14ef84adb03c29"
     end
   when "standalone"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}.zip"
@@ -60,6 +61,7 @@ when "windows"
     when "6.0.3"; "3c917b8c828c54785b4dec36a073a9c587ed71669ff5c6e792d7f6f3ac338bb6"
     when "6.0.4"; "39e89c69f539c0e0404ebeffa40fc784129a221ca2a1c2da535691b865d706a9"
     when "6.0.5"; "2ce8e65247dbb5d09e3b7f54e9ee827459229c2d52b73ec60ee8c2e557b6127b"
+    when "6.0.6"; "9d037c9666cfb606308be3af1f70447db978ecbe8032f0d0961cbcad2b848b79"
     end
   when "war"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-war.zip"
@@ -72,6 +74,7 @@ when "windows"
     when "6.0.3"; "768b73d58fac78b83495cc6918c28e60d68417f4a6d2ceb70ccc7927f8cff6b5"
     when "6.0.4"; "8214851759cd5b6034d5064c4f181bc36eaeaa54421d3206a49c42d0ef55640f"
     when "6.0.5"; "55f06fae0525291b18e65da2c82a26aa2f4d300f6830fd08554eab89b5081e07"
+    when "6.0.6"; "54f516dc835d7e4f99409ebf39095960273b45dec98f86c5dc6923eb5cc8f258"
     end
   end
 else
@@ -87,6 +90,7 @@ else
     when "6.0.3"; node['jira']['arch'] == "x64" ? "cdbd679e70097120c0083e9e0949c66b842742a3a4ccbae0db01b81d9e9fce9e" : "cda9499247c43c0f812bd2924e569ba3dd08c088e03455ec9c1f79bd30c1509a"
     when "6.0.4"; node['jira']['arch'] == "x64" ? "d7b845cb21461f032e1563e40f7daa220277809c53e14e4342728f04d0fa039a" : "4f60c69a13d3d66b0864849d9d3d5a8dfe240830b332cdd8848ae14055709984"
     when "6.0.5"; node['jira']['arch'] == "x64" ? "0826bf54c7765b053e571d3118b8b48f899d60a76518dc4df34da14a66930e37" : "10f9cc9ebb702f01d44f315eabfa4bc1af75dadf161a2cf6d5439c720d604fed"
+    when "6.0.6"; node['jira']['arch'] == "x64" ? "bf7145fbbbe0446f3a349e85b7b1277cab3cbe1dfc85029a2fb974f8fac3be59" : "030f25f6ab565d66b9f390dced8cafafe0d338ea792d942a6d1901888fa91b7d"
     end
   when "standalone"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}.tar.gz"
@@ -99,6 +103,7 @@ else
     when "6.0.3"; "0f94b9d31b8825e91c05e06538dce5891801b83549adbc1dfd26f5b9100c24cf"
     when "6.0.4"; "ca0f80c36ab408131e283b5c00aead949ce37c4ef8a870b2726eb55882ea6821"
     when "6.0.5"; "9050297a28059468a9a3ddfcc8b788aaf62210b341f547d4aebbab92baa96dd3"
+    when "6.0.6"; "27e699692e107a9790926d5f6fb0ddb89a1bd70e1d6877ce23991c0701495d67"
     end
   when "war"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-war.tar.gz"
@@ -111,6 +116,7 @@ else
     when "6.0.3"; "e1038bfba3365ccd85d1ba86bb9c5c36591d56637e5f9acab9fa01654386c588"
     when "6.0.4"; "f994ed71ea29764187a1cb1eb12d726182cd404d0a77dfb585ad70789d75e80f"
     when "6.0.5"; "4a7eda7da278be778add316bd783a5564ae931f7d77ad6078217dd3d8b49f595"
+    when "6.0.6"; "d6ce6bfe41275887cf6004827916b43d29a9c1b8a1b2029c18d9a4e54c9b199b"
     end
   end
 end
