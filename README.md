@@ -142,7 +142,7 @@ _optional:_
 Repeat for other Chef environments as necessary. Example:
 
     {
-      "id": "jira"
+      "id": "jira",
       "development": {
         "database": {
           "type": "postgresql",
