@@ -50,6 +50,8 @@ when "windows"
     when "6.0.5"; node['jira']['arch'] == "x64" ? "470de9a8a3f14c9cf5cde0b950c7cdfc4019c9cb55f1566ada136a2b8737a7c5" : "565385605da0fa5e4158e1e42cedcb2bda3a40f18732594f077a7a921ac86354"
     when "6.0.6"; node['jira']['arch'] == "x64" ? "0c62209c7564b64b6cbd176804169959df13817a8d2e0285583ba35bc4131541" : "95e692b444b97c69c18326318d76b3452aaa04b6a4883a16aa14ef84adb03c29"
     when "6.0.7"; node['jira']['arch'] == "x64" ? "48eb2264ddc48b03edd2b0c3f26f2de2cb281e76e1892e8fb62cb015556a8943" : "fcd6b1621cf64bd0668b978e51092ec787773f842b8124472a01c96b2e67cb7b"
+    when "6.0.8"; node['jira']['arch'] == "x64" ? "a3fefd20ba4b14bb6d99877f645439f8f392adc819bea8b34b2f668c110fa3c5" : "f6ea152b9bdf7eb834a7c467e52a1cc42225d8b9e2c35a0b6248d6eac31068be"
+    when "6.1"; node['jira']['arch'] == "x64" ? "4bae29a79cc76b6845be5149bfa18a82918a0bfcfa7bd621514bc73cdfa7690f" : "c484ffcb4f9fb14e490273d655f6659bcf8de3b0b74439245408099bc32b70ac"
     end
   when "standalone"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}.zip"
@@ -64,6 +66,8 @@ when "windows"
     when "6.0.5"; "2ce8e65247dbb5d09e3b7f54e9ee827459229c2d52b73ec60ee8c2e557b6127b"
     when "6.0.6"; "9d037c9666cfb606308be3af1f70447db978ecbe8032f0d0961cbcad2b848b79"
     when "6.0.7"; "4bc901c9e6d01291936cd2c1de9692582edfbc476ec256865cc37e936813e899"
+    when "6.0.8"; "410d77cb66f9a3972609a41f407ca2dc5bfaee41c477f4b06f90a9588f9546f2"
+    when "6.1"; "51131e1c7a453468b14dccf86560b8e023dc840fdc9f44a88a89793ca76cd54f"
     end
   when "war"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-war.zip"
@@ -78,6 +82,8 @@ when "windows"
     when "6.0.5"; "55f06fae0525291b18e65da2c82a26aa2f4d300f6830fd08554eab89b5081e07"
     when "6.0.6"; "54f516dc835d7e4f99409ebf39095960273b45dec98f86c5dc6923eb5cc8f258"
     when "6.0.7"; "ea1a60a2585dcb97ddf0e9dc0c4755e842bed40b2ae11ac0e9044412b4bae6b0"
+    when "6.0.8"; "82b92df5337a7f0fd4c8aa95a56594b675050f3b066a8dec0563dccebe15fd30"
+    when "6.1"; "2377e4c3546760773d8e2f9d22d5d7bafd05980bf27b8f6d22a7126863d9da9a"
     end
   end
 else
@@ -95,6 +101,8 @@ else
     when "6.0.5"; node['jira']['arch'] == "x64" ? "0826bf54c7765b053e571d3118b8b48f899d60a76518dc4df34da14a66930e37" : "10f9cc9ebb702f01d44f315eabfa4bc1af75dadf161a2cf6d5439c720d604fed"
     when "6.0.6"; node['jira']['arch'] == "x64" ? "bf7145fbbbe0446f3a349e85b7b1277cab3cbe1dfc85029a2fb974f8fac3be59" : "030f25f6ab565d66b9f390dced8cafafe0d338ea792d942a6d1901888fa91b7d"
     when "6.0.7"; node['jira']['arch'] == "x64" ? "89da53718d80aad4680e48559ff126ffb35addccfed556c022d5450fb8e44cbb" : "159f143a1d15c9764b05f0b07f5ea24e4afe851f276ba5290eadabcf5f404a53"
+    when "6.0.8"; node['jira']['arch'] == "x64" ? "b7d14d74247272056316ae89d5496057b4192fb3c2b78d3aab091b7ba59ca7aa" : "ad1d17007314cf43d123c2c9c835e03c25cd8809491a466ff3425d1922d44dc0"
+    when "6.1"; node['jira']['arch'] == "x64" ? "72e49cc770cc2a1078dd60ad11329508d6815582424d16836efd873f3957e2c8" : "c879e0c4ba5f508b4df0deb7e8f9baf3b39db5d7373eac3b20076c6f6ead6e84"
     end
   when "standalone"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}.tar.gz"
@@ -109,6 +117,8 @@ else
     when "6.0.5"; "9050297a28059468a9a3ddfcc8b788aaf62210b341f547d4aebbab92baa96dd3"
     when "6.0.6"; "27e699692e107a9790926d5f6fb0ddb89a1bd70e1d6877ce23991c0701495d67"
     when "6.0.7"; "6de5ac1a06116de2c95d5944eab1da416170e8b6bea3a0a7a641b52836100946"
+    when "6.0.8"; "2ca0eb656a348c43b7b9e84f7029a7e0eed27eea9001f34b89bbda492a101cb6"
+    when "6.1"; "e63821f059915074ff866993eb5c2f452d24a0a2d3cf0dccea60810c8b3063a0"
     end
   when "war"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-war.tar.gz"
@@ -123,6 +133,8 @@ else
     when "6.0.5"; "4a7eda7da278be778add316bd783a5564ae931f7d77ad6078217dd3d8b49f595"
     when "6.0.6"; "d6ce6bfe41275887cf6004827916b43d29a9c1b8a1b2029c18d9a4e54c9b199b"
     when "6.0.7"; "d75d798021038584a8f987142ac161c2d467329a430a3573538d8600d8805005"
+    when "6.0.8"; "4bcee56a7537a12e9eeec7a9573f59fd37d6a631c5893152662bef2daa54869d"
+    when "6.1"; "7beb69e3b66560b696a3c6118b79962614d17cd26f9ff6df626380679c848d29"
     end
   end
 end
