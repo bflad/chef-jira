@@ -64,7 +64,7 @@ install_type | JIRA install type - "installer", "standalone", "war" | String | i
 url_base | URL base for JIRA install | String | http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira
 url | URL for JIRA install | String | auto-detected (see attributes/default.rb)
 user | user running JIRA | String | jira
-version | Confluence version to install | String | 6.0.7
+version | Confluence version to install | String | 6.1
 
 ### JIRA Database Attributes
 
