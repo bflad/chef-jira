@@ -64,7 +64,7 @@ install_type | JIRA install type - "installer", "standalone", "war" | String | i
 url_base | URL base for JIRA install | String | http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira
 url | URL for JIRA install | String | auto-detected (see attributes/default.rb)
 user | user running JIRA | String | jira
-version | Confluence version to install | String | 6.1
+version | JIRA version to install | String | 6.1
 
 ### JIRA Database Attributes
 
@@ -95,7 +95,7 @@ support_args | additional JAVA_OPTS recommended by Atlassian support for JIRA JV
 
 These attributes are under the `node['jira']['tomcat']` namespace.
 
-Any `node['confluence']['tomcat']['key*']` attributes are overridden by `confluence/confluence` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
+Any `node['jira']['tomcat']['key*']` attributes are overridden by `jira/jira` encrypted data bag (Hosted Chef) or data bag (Chef Solo), if it exists
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
