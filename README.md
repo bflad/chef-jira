@@ -188,25 +188,26 @@ Using individual recipes, you can use this cookbook to configure JIRA to fit you
 
 Here's how you can quickly get testing or developing against the cookbook thanks to [Vagrant](http://vagrantup.com/) and [Berkshelf](http://berkshelf.com/).
 
-    gem install bundler --no-ri --no-rdoc
+    vagrant plugin install vagrant-berkshelf
+    vagrant plugin install vagrant-cachier
+    vagrant plugin install vagrant-omnibus
     git clone git://github.com/bflad/chef-jira.git
     cd chef-jira
-    vagrant plugin install vagrant-berkshelf
-    vagrant plugin install vagrant-omnibus
-    vagrant up BOX # BOX being centos6 or ubuntu1204
+    vagrant up BOX # BOX being centos5, centos6, debian7, fedora18, fedora19, fedora20, freebsd9, ubuntu1204, ubuntu1210, ubuntu1304, or ubuntu1310
 
 You may need to add the following hosts entries:
 
 * 192.168.50.10 jira-centos-6
-* 192.168.50.11 jira-ubuntu-1204
+* 192.168.50.10 jira-ubuntu-1204
+* (etc.)
 
 The running JIRA server is accessible from the host machine:
 
 CentOS 6 Box:
-* Web UI: https://192.168.50.10/
+* Web UI: https://jira-centos-6/
 
 Ubuntu 12.04 Box:
-* Web UI: https://192.168.50.11/
+* Web UI: https://jira-ubuntu-1204/
 
 You can then SSH into the running VM using the `vagrant ssh` command.
 The VM can easily be stopped and deleted with the `vagrant destroy`
