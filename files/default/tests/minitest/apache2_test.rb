@@ -1,6 +1,6 @@
 require File.expand_path('../support/helpers', __FILE__)
 
-describe_recipe "jira::apache2" do
+describe_recipe 'jira::apache2' do
   include Helpers::Jira
 
   it 'has apache VirtualHost' do
@@ -14,5 +14,5 @@ describe_recipe "jira::apache2" do
   it 'enables apache' do
     apache_service.must_be_enabled
   end
-  
+
 end

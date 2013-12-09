@@ -1,6 +1,6 @@
 require File.expand_path('../support/helpers', __FILE__)
 
-describe_recipe "jira::default" do
+describe_recipe 'jira::default' do
   include Helpers::Jira
 
   it 'has jira user' do
@@ -12,11 +12,11 @@ describe_recipe "jira::default" do
   end
 
   it 'starts Jira' do
-    service("jira").must_be_running
+    service('jira').must_be_running
   end
 
   it 'enables Jira' do
-    service("jira").must_be_enabled
+    service('jira').must_be_enabled
   end
-  
+
 end

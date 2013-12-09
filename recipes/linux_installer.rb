@@ -20,16 +20,16 @@
 settings = Jira.settings(node)
 
 template "#{Chef::Config[:file_cache_path]}/atlassian-jira-response.varfile" do
-  source "response.varfile.erb"
-  owner "root"
-  group "root"
-  mode "0644"
+  source 'response.varfile.erb'
+  owner 'root'
+  group 'root'
+  mode '0644'
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin" do
   source    node['jira']['url']
   checksum  node['jira']['checksum']
-  mode      "0755"
+  mode      '0755'
   action    :create_if_missing
 end
 
@@ -39,7 +39,7 @@ execute "Installing Jira #{node['jira']['version']}" do
   creates node['jira']['install_path']
 end
 
-execute "Generating Self-Signed Java Keystore" do
+execute 'Generating Self-Signed Java Keystore' do
   command <<-COMMAND
     #{node['java']['java_home']}/bin/keytool -genkey \
       -alias tomcat \
@@ -53,16 +53,16 @@ execute "Generating Self-Signed Java Keystore" do
   creates "#{node['jira']['home_path']}/.keystore"
 end
 
-mysql_connector_j "#{node['jira']['install_path']}/lib" if settings['database']['type'] == "mysql"
+mysql_connector_j "#{node['jira']['install_path']}/lib" if settings['database']['type'] == 'mysql'
 
-template "/etc/init.d/jira" do
-  source "jira.init.erb"
-  mode   "0755"
-  notifies :restart, "service[jira]", :delayed
+template '/etc/init.d/jira' do
+  source 'jira.init.erb'
+  mode   '0755'
+  notifies :restart, 'service[jira]', :delayed
 end
 
-service "jira" do
+service 'jira' do
   supports :status => :true, :restart => :true
   action :enable
-  subscribes :restart, "java_ark[jdk]"
+  subscribes :restart, 'java_ark[jdk]'
 end
