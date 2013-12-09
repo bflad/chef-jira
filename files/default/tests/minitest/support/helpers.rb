@@ -1,4 +1,6 @@
+# Helpers module
 module Helpers
+  # Helpers::Jira module
   module Jira
     include MiniTest::Chef::Assertions
     include MiniTest::Chef::Context
