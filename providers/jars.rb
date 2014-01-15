@@ -7,6 +7,7 @@ end
 action :deploy do
   download
   deploy
+  new_resource.updated_by_last_action(true)
 end
 
 action :download do
