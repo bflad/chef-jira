@@ -75,7 +75,7 @@ Vagrant.configure("2") do |config|
   config.vm.network :private_network, ip: '192.168.50.10'
 
   config.vm.provider "virtualbox" do |v|
-    v.customize ["modifyvm", :id, "--memory", 1024]
+    v.customize ["modifyvm", :id, "--memory", 2048]
   end
 
   config.vm.provision :chef_solo do |chef|
@@ -87,16 +87,25 @@ Vagrant.configure("2") do |config|
           "accept_oracle_download_terms" => true
         }
       },
+      "jira" => {
+        "install_type" => "war"
+      },
       "mysql" => {
         "bind_address" => "0.0.0.0",
         "server_root_password" => "iloverandompasswordsbutthiswilldo",
         "server_repl_password" => "iloverandompasswordsbutthiswilldo",
         "server_debian_password" => "iloverandompasswordsbutthiswilldo"
+      },
+      "tomcat" => {
+        "java_options" => "-XX:MaxPermSize=256M -Xmx768M -Djava.awt.headless=true",
+        "keystore_password" => "iloverandompasswordsbutthiswilldo",
+        "truststore_password" => "iloverandompasswordsbutthiswilldo",
       }
     }
 
     chef.run_list = [
       'recipe[java]',
+      'recipe[tomcat]',
       "recipe[#{cookbook}]"
     ]
   end
