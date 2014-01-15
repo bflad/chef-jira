@@ -1,13 +1,14 @@
-default['jira']['backup_home']    = true
-default['jira']['backup_install'] = true
-default['jira']['home_backup']    = '/tmp/atlassian-jira-home-backup.tgz'
+# Optionally include tomcat attributes if available
+begin
+  include_attribute 'tomcat'
+end
+
 default['jira']['home_path']      = '/var/atlassian/application-data/jira'
-default['jira']['install_backup'] = '/tmp/atlassian-jira-backup.tgz'
+default['jira']['init_type']      = 'sysv'
 default['jira']['install_path']   = '/opt/atlassian/jira'
 default['jira']['install_type']   = 'installer'
 default['jira']['url_base']       = 'http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira'
-default['jira']['user']           = 'jira'
-default['jira']['version']        = '6.1'
+default['jira']['version']        = '6.1.5'
 
 if node['kernel']['machine'] == 'x86_64'
   default['jira']['arch'] = 'x64'
@@ -35,6 +36,7 @@ when 'windows'
       when '6.0.7' then node['jira']['arch'] == 'x64' ? '48eb2264ddc48b03edd2b0c3f26f2de2cb281e76e1892e8fb62cb015556a8943' : 'fcd6b1621cf64bd0668b978e51092ec787773f842b8124472a01c96b2e67cb7b'
       when '6.0.8' then node['jira']['arch'] == 'x64' ? 'a3fefd20ba4b14bb6d99877f645439f8f392adc819bea8b34b2f668c110fa3c5' : 'f6ea152b9bdf7eb834a7c467e52a1cc42225d8b9e2c35a0b6248d6eac31068be'
       when '6.1' then node['jira']['arch'] == 'x64' ? '4bae29a79cc76b6845be5149bfa18a82918a0bfcfa7bd621514bc73cdfa7690f' : 'c484ffcb4f9fb14e490273d655f6659bcf8de3b0b74439245408099bc32b70ac'
+      when '6.1.5' then node['jira']['arch'] == 'x64' ? 'c0f5f69cc7ba5251619f4bfa104849e97d853926439b813c9393f8927e984aa8' : '4459df620be50ddaa85ca7fa8ab7e62bac175da7dd02687483f2a338b407b27c'
       end
   when 'standalone'
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}.zip"
@@ -52,6 +54,7 @@ when 'windows'
       when '6.0.7' then '4bc901c9e6d01291936cd2c1de9692582edfbc476ec256865cc37e936813e899'
       when '6.0.8' then '410d77cb66f9a3972609a41f407ca2dc5bfaee41c477f4b06f90a9588f9546f2'
       when '6.1' then '51131e1c7a453468b14dccf86560b8e023dc840fdc9f44a88a89793ca76cd54f'
+      when '6.1.5' then '4a61d498529e1f3dcbd490de7b63d802fef61336632cf8cb46f865b8bf0f34e5'
       end
   when 'war'
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-war.zip"
@@ -69,6 +72,7 @@ when 'windows'
       when '6.0.7' then 'ea1a60a2585dcb97ddf0e9dc0c4755e842bed40b2ae11ac0e9044412b4bae6b0'
       when '6.0.8' then '82b92df5337a7f0fd4c8aa95a56594b675050f3b066a8dec0563dccebe15fd30'
       when '6.1' then '2377e4c3546760773d8e2f9d22d5d7bafd05980bf27b8f6d22a7126863d9da9a'
+      when '6.1.5' then '4f754a1da16fcb26154e8f7331525d155e4953551aa132e8b9c0acf6f1bc65b7'
       end
   end
 else
@@ -89,6 +93,7 @@ else
       when '6.0.7' then node['jira']['arch'] == 'x64' ? '89da53718d80aad4680e48559ff126ffb35addccfed556c022d5450fb8e44cbb' : '159f143a1d15c9764b05f0b07f5ea24e4afe851f276ba5290eadabcf5f404a53'
       when '6.0.8' then node['jira']['arch'] == 'x64' ? 'b7d14d74247272056316ae89d5496057b4192fb3c2b78d3aab091b7ba59ca7aa' : 'ad1d17007314cf43d123c2c9c835e03c25cd8809491a466ff3425d1922d44dc0'
       when '6.1' then node['jira']['arch'] == 'x64' ? '72e49cc770cc2a1078dd60ad11329508d6815582424d16836efd873f3957e2c8' : 'c879e0c4ba5f508b4df0deb7e8f9baf3b39db5d7373eac3b20076c6f6ead6e84'
+      when '6.1.5' then node['jira']['arch'] == 'x64' ? 'b0b67b77c6c1d96f4225ab3c22f31496f356491538db1ee143eca0a58de07f78' : 'f3e589fa34182195902dcb724d82776005a975df55406b4bd5864613ca325d97'
       end
   when 'standalone'
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}.tar.gz"
@@ -106,6 +111,7 @@ else
       when '6.0.7' then '6de5ac1a06116de2c95d5944eab1da416170e8b6bea3a0a7a641b52836100946'
       when '6.0.8' then '2ca0eb656a348c43b7b9e84f7029a7e0eed27eea9001f34b89bbda492a101cb6'
       when '6.1' then 'e63821f059915074ff866993eb5c2f452d24a0a2d3cf0dccea60810c8b3063a0'
+      when '6.1.5' then '6e72f3820b279ec539e5c12ebabed13bb239f49ba38bb2e70a40d36cb2a7d68f'
       end
   when 'war'
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-war.tar.gz"
@@ -123,6 +129,7 @@ else
       when '6.0.7' then 'd75d798021038584a8f987142ac161c2d467329a430a3573538d8600d8805005'
       when '6.0.8' then '4bcee56a7537a12e9eeec7a9573f59fd37d6a631c5893152662bef2daa54869d'
       when '6.1' then '7beb69e3b66560b696a3c6118b79962614d17cd26f9ff6df626380679c848d29'
+      when '6.1.5' then 'a6e6dfb42e01f57263d070d27fb7f66110a6fe7395c7ec6199784d2458ca661c'
       end
   end
 end
@@ -148,12 +155,26 @@ else
   default['jira']['apache2']['ssl']['key_file']         = '/etc/ssl/private/ssl-cert-snakeoil.key'
 end
 
+default['jira']['container_server']['name'] = 'tomcat'
+default['jira']['container_server']['version'] = '6'
+
+default['jira']['build']['targets'] = 'war'
+default['jira']['build']['enable'] = true
+default['jira']['build']['exclude_jars'] = %w{jcl-over-slf4j jul-to-slf4j log4j slf4j-api slf4j-log4j12}
+default['jira']['build']['file'] = "#{node['jira']['install_path']}/dist-#{node['jira']['container_server']['name']}/atlassian-jira-#{node['jira']['version']}.war"
+
 default['jira']['database']['host']     = 'localhost'
 default['jira']['database']['name']     = 'jira'
 default['jira']['database']['password'] = 'changeit'
 default['jira']['database']['port']     = 3306
 default['jira']['database']['type']     = 'mysql'
 default['jira']['database']['user']     = 'jira'
+
+default['jira']['jars']['deploy_jars'] = %w{carol carol-properties hsqldb jcl-over-slf4j jonas_timer jotm jotm-iiops_stubs jotm-jmrp_stubs jta jul-to-slf4j log4j objectweb-datasource ots-jts slf4j-api slf4j-log4j12 xapool}
+default['jira']['jars']['install_path'] = node['jira']['install_path'] + '-jars'
+default['jira']['jars']['url_base'] = 'http://www.atlassian.com/software/jira/downloads/binary/jira-jars'
+default['jira']['jars']['version'] = node['jira']['version'].split('.')[0..1].join('.')
+default['jira']['jars']['url'] = "#{node['jira']['jars']['url_base']}-#{node['jira']['container_server']['name']}-distribution-#{node['jira']['jars']['version']}-#{node['jira']['container_server']['name']}-#{node['jira']['container_server']['version']}x.zip"
 
 default['jira']['jvm']['minimum_memory']  = '256m'
 default['jira']['jvm']['maximum_memory']  = '768m'
@@ -166,3 +187,26 @@ default['jira']['tomcat']['keystoreFile'] = "#{node['jira']['home_path']}/.keyst
 default['jira']['tomcat']['keystorePass'] = 'changeit'
 default['jira']['tomcat']['port']     = '8080'
 default['jira']['tomcat']['ssl_port'] = '8443'
+
+default['jira']['war']['file'] = node['jira']['build']['file']
+
+case node['jira']['container_server']['name']
+when 'tomcat'
+  if node['jira']['install_type'] == 'war'
+    default['jira']['context'] = 'jira'
+    begin
+      default['jira']['context_path'] = node['tomcat']['context_dir']
+      default['jira']['lib_path'] = node['tomcat']['lib_dir']
+      default['jira']['user'] = node['tomcat']['user']
+    rescue
+      default['jira']['context_path'] = "/usr/share/tomcat#{node['jira']['container_server']['version']}/conf/Catalina/localhost"
+      default['jira']['lib_path'] = "/usr/share/tomcat#{node['jira']['container_server']['version']}/lib"
+      default['jira']['user'] = 'tomcat'
+    end
+  else
+    default['jira']['context'] = ''
+    default['jira']['context_path'] = "#{node['jira']['install_path']}/conf/Catalina/localhost"
+    default['jira']['lib_path'] = "#{node['jira']['install_path']}/lib"
+    default['jira']['user'] = 'jira'
+  end
+end
