@@ -31,7 +31,7 @@ end
 def deploy_jar(jar_path, install_path)
   jar = ::File.basename(jar_path)
   installed_jar = jar_exists?(jar, install_path)
-  
+
   if installed_jar
     if ::File.identical?(jar, installed_jar)
       return

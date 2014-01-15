@@ -12,5 +12,5 @@ attribute :url, :kind_of => [String], :default => node['jira']['url']
 attribute :version, :kind_of => [String], :default => node['jira']['version']
 
 # Internal attributes
-attribute :built, :kind_of => [TrueClass,FalseClass], :default => false
-attribute :downloaded, :kind_of => [TrueClass,FalseClass], :default => false
+attribute :built, :kind_of => [TrueClass, FalseClass], :default => false
+attribute :downloaded, :kind_of => [TrueClass, FalseClass], :default => false
