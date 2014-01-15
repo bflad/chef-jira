@@ -1,0 +1,7 @@
+<Context path="/<%= node['jira']['context'] %>" docBase="<%= node['jira']['war']['file'] %>" debug="0" useHttpOnly="true">
+ 
+  <Resource name="UserTransaction" auth="Container" type="javax.transaction.UserTransaction"
+    factory="org.objectweb.jotm.UserTransactionFactory" jotm.timeout="60"/>
+  <Manager pathname=""/>
+ 
+</Context>
