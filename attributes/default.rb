@@ -1,8 +1,3 @@
-# Optionally include tomcat attributes if available
-begin
-  include_attribute 'tomcat'
-end
-
 default['jira']['home_path']      = '/var/atlassian/application-data/jira'
 default['jira']['init_type']      = 'sysv'
 default['jira']['install_path']   = '/opt/atlassian/jira'
