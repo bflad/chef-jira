@@ -1,3 +1,7 @@
+## 2.0.1
+
+* Bugfix: #8: Remove include_attribute from default attributes to prevent hard dependency on tomcat cookbook
+
 ## 2.0.0
 
 If you were using the default recipe, there are no changes you need to make for your environment to upgrade this cookbook.
