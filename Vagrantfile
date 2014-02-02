@@ -99,7 +99,7 @@ Vagrant.configure('2') do |config|
       'tomcat' => {
         'java_options' => '-XX:MaxPermSize=256M -Xmx768M -Djava.awt.headless=true',
         'keystore_password' => 'iloverandompasswordsbutthiswilldo',
-        'truststore_password' => 'iloverandompasswordsbutthiswilldo',
+        'truststore_password' => 'iloverandompasswordsbutthiswilldo'
       }
     }
 
