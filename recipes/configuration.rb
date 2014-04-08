@@ -8,8 +8,8 @@ end
 
 template "#{node['jira']['home_path']}/dbconfig.xml" do
   source 'dbconfig.xml.erb'
-  owner  node['jira']['user']
-  mode   '0644'
+  owner node['jira']['user']
+  mode '0644'
   variables :database => settings['database']
   notifies :restart, 'service[jira]', :delayed unless node['jira']['install_type'] == 'war'
 end

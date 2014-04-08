@@ -1,6 +1,6 @@
 def load_current_resource
   @current_resource = Chef::Resource::JiraWar.new(new_resource)
-  @current_resource.built(::File.exists?(new_resource.file))
+  @current_resource.built(::File.exist?(new_resource.file))
   @current_resource.downloaded(::File.directory?("#{new_resource.path}-#{new_resource.version}"))
   @current_resource
 end
@@ -26,7 +26,7 @@ def build
   end
 
   execute "Building JIRA #{new_resource.version} in #{new_resource.path}" do
-    cwd     new_resource.path
+    cwd new_resource.path
     command "./build.sh #{new_resource.targets}"
     creates new_resource.file
     only_if { node['jira']['build']['enable'] }
@@ -47,11 +47,11 @@ def download
   end
 
   ark ark_path do
-    checksum    new_resource.checksum
+    checksum new_resource.checksum
     prefix_home prefix_path
     prefix_root prefix_path
-    url         new_resource.url
-    version     new_resource.version
+    url new_resource.url
+    version new_resource.version
   end
 end
 

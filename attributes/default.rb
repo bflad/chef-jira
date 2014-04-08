@@ -155,7 +155,7 @@ default['jira']['container_server']['version'] = '6'
 
 default['jira']['build']['targets'] = 'war'
 default['jira']['build']['enable'] = true
-default['jira']['build']['exclude_jars'] = %w{jcl-over-slf4j jul-to-slf4j log4j slf4j-api slf4j-log4j12}
+default['jira']['build']['exclude_jars'] = %w(jcl-over-slf4j jul-to-slf4j log4j slf4j-api slf4j-log4j12)
 default['jira']['build']['file'] = "#{node['jira']['install_path']}/dist-#{node['jira']['container_server']['name']}/atlassian-jira-#{node['jira']['version']}.war"
 
 default['jira']['database']['host']     = 'localhost'
@@ -165,7 +165,7 @@ default['jira']['database']['port']     = 3306
 default['jira']['database']['type']     = 'mysql'
 default['jira']['database']['user']     = 'jira'
 
-default['jira']['jars']['deploy_jars'] = %w{carol carol-properties hsqldb jcl-over-slf4j jonas_timer jotm jotm-iiops_stubs jotm-jmrp_stubs jta jul-to-slf4j log4j objectweb-datasource ots-jts slf4j-api slf4j-log4j12 xapool}
+default['jira']['jars']['deploy_jars'] = %w(carol carol-properties hsqldb jcl-over-slf4j jonas_timer jotm jotm-iiops_stubs jotm-jmrp_stubs jta jul-to-slf4j log4j objectweb-datasource ots-jts slf4j-api slf4j-log4j12 xapool)
 default['jira']['jars']['install_path'] = node['jira']['install_path'] + '-jars'
 default['jira']['jars']['url_base'] = 'http://www.atlassian.com/software/jira/downloads/binary/jira-jars'
 default['jira']['jars']['version'] = node['jira']['version'].split('.')[0..1].join('.')

@@ -1,6 +1,6 @@
 template '/etc/init.d/jira' do
   source 'jira.init.erb'
-  mode   '0755'
+  mode '0755'
   notifies :restart, 'service[jira]', :delayed
 end
 

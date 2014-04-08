@@ -60,11 +60,11 @@ def download
   package 'unzip'
 
   ark ark_path do
-    prefix_home       prefix_path
-    prefix_root       prefix_path
+    prefix_home prefix_path
+    prefix_root prefix_path
     strip_leading_dir false
-    url               new_resource.url
-    version           new_resource.version
+    url new_resource.url
+    version new_resource.version
   end
 end
 

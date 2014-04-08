@@ -6,10 +6,10 @@ template "#{Chef::Config[:file_cache_path]}/atlassian-jira-response.varfile" do
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin" do
-  source    node['jira']['url']
-  checksum  node['jira']['checksum']
-  mode      '0755'
-  action    :create
+  source node['jira']['url']
+  checksum node['jira']['checksum']
+  mode '0755'
+  action :create
 end
 
 execute "Installing Jira #{node['jira']['version']}" do
