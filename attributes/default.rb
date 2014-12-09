@@ -1,9 +1,10 @@
-default['jira']['home_path']      = '/var/atlassian/application-data/jira'
-default['jira']['init_type']      = 'sysv'
-default['jira']['install_path']   = '/opt/atlassian/jira'
-default['jira']['install_type']   = 'installer'
-default['jira']['url_base']       = 'http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira'
-default['jira']['version']        = '6.1.5'
+default['jira']['home_path']          = '/var/atlassian/application-data/jira'
+default['jira']['init_type']          = 'sysv'
+default['jira']['install_path']       = '/opt/atlassian/jira'
+default['jira']['install_type']       = 'installer'
+default['jira']['url_base']           = 'http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira'
+default['jira']['version']            = '6.1.5'
+default['jira']['backup_when_update'] = false
 
 if node['kernel']['machine'] == 'x86_64'
   default['jira']['arch'] = 'x64'
