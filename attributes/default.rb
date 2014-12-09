@@ -16,6 +16,7 @@ case node['platform_family']
 when 'windows'
   case node['jira']['install_type']
   when 'installer'
+    default['java']['java_home'] = "#{node['jira']['install_path']}/jre"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-#{node['jira']['arch']}.exe"
     default['jira']['checksum'] =
       case node['jira']['version']
@@ -73,6 +74,7 @@ when 'windows'
 else
   case node['jira']['install_type']
   when 'installer'
+    default['java']['java_home'] = "#{node['jira']['install_path']}/jre"
     default['jira']['url']      = "#{node['jira']['url_base']}-#{node['jira']['version']}-#{node['jira']['arch']}.bin"
     default['jira']['checksum'] =
       case node['jira']['version']
