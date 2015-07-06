@@ -17,7 +17,12 @@
 ### END INIT INFO
 
 # Source function library.
+<% case node['platform_family'] -%>
+<% when 'rhel' -%>
 . /etc/rc.d/init.d/functions
+<% else -%>
+. /lib/lsb/init-functions
+<% end -%>
 
 # JIRA Linux service controller script
 APP=JIRA
@@ -51,7 +56,13 @@ case "$1" in
         RETVAL=$?
         ;;
     status)
+        <% case node['platform_family'] -%>
+        <% when 'rhel' -%>
         status -p $BASE/work/catalina.pid $APP
+        <% else -%>
+        status_of_proc -p $BASE/work/catalina.pid $JAVA_HOME/bin/java $APP
+        <% end -%>
+
         RETVAL=$?
         ;;
     *)
