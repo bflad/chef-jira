@@ -133,8 +133,8 @@ end
 default['jira']['apache2']['access_log']         = ''
 default['jira']['apache2']['error_log']          = ''
 default['jira']['apache2']['port']               = 80
-default['jira']['apache2']['virtual_host_alias'] = node['fqdn']
-default['jira']['apache2']['virtual_host_name']  = node['hostname']
+default['jira']['apache2']['virtual_host_name']  = node['fqdn']
+default['jira']['apache2']['virtual_host_alias'] = node['hostname']
 
 default['jira']['apache2']['ssl']['access_log']       = ''
 default['jira']['apache2']['ssl']['chain_file']       = ''
