@@ -13,14 +13,18 @@
   <% end -%>
   <% end -%>
   DocumentRoot <%= node['jira']['install_path'] %>
-  
-  CustomLog <%= node['jira']['apache2']['access_log'].empty? ? node['apache']['log_dir']+"/jira-access.log" : node['jira']['apache2']['access_log'] %> combined
-  ErrorLog <%= node['jira']['apache2']['error_log'].empty? ? node['apache']['log_dir']+"/jira-error.log" : node['jira']['apache2']['error_log'] %>
+
+  CustomLog <%= node['jira']['apache2']['access_log'] %> combined
+  ErrorLog <%= node['jira']['apache2']['error_log'] %>
   LogLevel warn
 
   <Proxy *>
+  <% if node['apache']['version'].to_f < 2.4 -%>
     Order Deny,Allow
     Allow from all
+  <% else -%>
+    Require all granted
+  <% end -%>
   </Proxy>
   ProxyPass        / http://localhost:<%= node['jira']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
   ProxyPassReverse / http://localhost:<%= node['jira']['tomcat']['port'] %>/
@@ -38,13 +42,17 @@
   <% end -%>
   DocumentRoot <%= node['jira']['install_path'] %>
 
-  CustomLog <%= node['jira']['apache2']['ssl']['access_log'].empty? ? node['apache']['log_dir']+"/jira-ssl-access.log" : node['jira']['apache2']['ssl']['access_log'] %> combined
-  ErrorLog <%= node['jira']['apache2']['ssl']['error_log'].empty? ? node['apache']['log_dir']+"/jira-ssl-error.log" : node['jira']['apache2']['ssl']['error_log'] %>
+  CustomLog <%= node['jira']['apache2']['ssl']['access_log'] %> combined
+  ErrorLog <%= node['jira']['apache2']['ssl']['error_log'] %>
   LogLevel warn
 
   <Proxy *>
+  <% if node['apache']['version'].to_f < 2.4 -%>
     Order Deny,Allow
     Allow from all
+  <% else -%>
+    Require all granted
+  <% end -%>
   </Proxy>
   ProxyPass        / http://localhost:<%= node['jira']['tomcat']['port'] %>/ connectiontimeout=5 timeout=300
   ProxyPassReverse / http://localhost:<%= node['jira']['tomcat']['port'] %>/
@@ -54,5 +62,8 @@
   SSLCertificateKeyFile <%= node['jira']['apache2']['ssl']['key_file'] %>
   <% unless node['jira']['apache2']['ssl']['chain_file'].empty? -%>
   SSLCertificateChainFile <%= node['jira']['apache2']['ssl']['chain_file'] %>
+  <% end -%>
+  <% unless node['jira']['apache2']['ssl']['ca_file'].empty? -%>
+  SSLCACertificateFile <%= node['jira']['apache2']['ssl']['ca_file'] %>
   <% end -%>
 </VirtualHost>
