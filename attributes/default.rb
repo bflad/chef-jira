@@ -1,5 +1,5 @@
 default['jira']['home_path']      = '/var/atlassian/application-data/jira'
-default['jira']['init_type']      = 'sysv'
+default['jira']['init_type']      = node['init_package'] # init (sysv) or systemd
 default['jira']['install_path']   = '/opt/atlassian/jira'
 default['jira']['install_type']   = 'installer'
 default['jira']['url_base']       = 'http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira'
