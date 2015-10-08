@@ -6,8 +6,8 @@ template "#{Chef::Config[:file_cache_path]}/atlassian-jira-response.varfile" do
 end
 
 remote_file "#{Chef::Config[:file_cache_path]}/atlassian-jira-#{node['jira']['version']}-#{node['jira']['arch']}.bin" do
-  source node['jira']['url']
-  checksum node['jira']['checksum']
+  source jira_artifact_url
+  checksum jira_artifact_checksum
   mode '0755'
   action :create
 end
