@@ -1,9 +1,11 @@
 ---
-driver_plugin: vagrant
-
-driver_config:
+driver:
+  name: vagrant
   customize:
     memory: 1024
+
+provisioner:
+  name: chef_zero
 
 platforms:
 - name: centos-6
@@ -20,6 +22,21 @@ platforms:
 suites:
 - name: default
   run_list:
-  - recipe[minitest-handler]
   - recipe[jira_test]
   attributes: {}
+- name: standalone-postgresql
+  run_list:
+  - recipe[jira_test]
+  attributes:
+    java:
+      install_flavor: oracle
+      java_home: /usr/lib/jvm/java-7-oracle
+      jdk_version: 7
+      oracle:
+        accept_oracle_download_terms: true
+    jira:
+      install_type: standalone
+      database:
+        type: postgresql
+        host: localhost
+        port: 5432
