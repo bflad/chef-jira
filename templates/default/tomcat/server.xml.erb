@@ -60,7 +60,7 @@
                    redirectPort="<%= node['jira']['apache2']['ssl']['port'] %>"
                    secure="true"
                    scheme="https"
-                   proxyName="<%= node['jira']['apache2']['virtual_host_alias'] %>"
+                   proxyName="<%= node['jira']['apache2']['virtual_host_name'] %>"
                    proxyPort="<%= node['jira']['apache2']['ssl']['port'] %>"
                    <% else -%>
                    redirectPort="<%= node['jira']['tomcat']['ssl_port'] %>"
