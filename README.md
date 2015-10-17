@@ -1,4 +1,6 @@
-# chef-jira [![Build Status](https://secure.travis-ci.org/bflad/chef-jira.png?branch=master)](http://travis-ci.org/bflad/chef-jira)
+# DEPRECATED chef-jira [![Build Status](https://secure.travis-ci.org/bflad/chef-jira.png?branch=master)](http://travis-ci.org/bflad/chef-jira)
+
+Please switch to using the community supported `jira` cookbook from the Chef SuperMarket: https://supermarket.chef.io/cookbooks/jira
 
 ## Description
 
