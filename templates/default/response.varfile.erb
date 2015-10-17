@@ -3,6 +3,7 @@
 # Local modifications will be overwritten by Chef.
 #
 rmiPort$Long=8005
+backupJira$Boolean=<%= node['jira']['backup_when_update'] ? "true" : "false" %>
 app.jiraHome=<%= node['jira']['home_path'] %>
 app.install.service$Boolean=true
 existingInstallationDir=<%= node['jira']['install_path'] %>
