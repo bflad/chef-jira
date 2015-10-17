@@ -1,5 +1,5 @@
 default['jira']['home_path']      = '/var/atlassian/application-data/jira'
-default['jira']['init_type']      = 'sysv'
+default['jira']['init_type']      = node['init_package'] # init (sysv) or systemd
 default['jira']['install_path']   = '/opt/atlassian/jira'
 default['jira']['install_type']   = 'installer'
 default['jira']['url_base']       = 'http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira'
@@ -130,15 +130,16 @@ else
 end
 # rubocop:enable BlockNesting
 
-default['jira']['apache2']['access_log']         = ''
-default['jira']['apache2']['error_log']          = ''
+default['jira']['apache2']['access_log']         = node['apache']['log_dir'] + '/jira-access.log'
+default['jira']['apache2']['error_log']          = node['apache']['log_dir'] + '/jira-error.log'
 default['jira']['apache2']['port']               = 80
 default['jira']['apache2']['virtual_host_alias'] = node['fqdn']
 default['jira']['apache2']['virtual_host_name']  = node['hostname']
 
-default['jira']['apache2']['ssl']['access_log']       = ''
+default['jira']['apache2']['ssl']['access_log']       = node['apache']['log_dir'] + '/jira-ssl-access.log'
 default['jira']['apache2']['ssl']['chain_file']       = ''
-default['jira']['apache2']['ssl']['error_log']        = ''
+default['jira']['apache2']['ssl']['ca_file']       = ''
+default['jira']['apache2']['ssl']['error_log']        = node['apache']['log_dir'] + '/jira-ssl-error.log'
 default['jira']['apache2']['ssl']['port']             = 443
 
 case node['platform_family']

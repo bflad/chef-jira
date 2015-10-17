@@ -16,6 +16,19 @@ platforms:
     box: opscode-ubuntu-12.04
     box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode_ubuntu-12.04_chef-provisionerless.box
     require_chef_omnibus: 11.8
+- name: ubuntu-15.04
+  driver_config:
+    box: opscode-ubuntu-15.04
+    box_url: http://opscode-vm-bento.s3.amazonaws.com/vagrant/virtualbox/opscode-ubuntu-15.04_chef-provisionerless.box
+  run_list:
+    - recipe[apt]
+  attributes:
+    jira:
+      init_type: systemd
+    postgresql:
+      # postgresql cookbook doesn't support 15.04 yet.
+      version: '9.4'
+      enable_pgdg_apt: false
 
 suites:
 - name: default
