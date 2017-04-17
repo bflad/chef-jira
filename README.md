@@ -60,8 +60,7 @@ These attributes are under the `node['jira']` namespace.
 
 Attribute | Description | Type | Default
 ----------|-------------|------|--------
-arch | architecture for JIRA installer - "x64" or "x32" | String | auto-detected (see attributes/default.rb)
-checksum | SHA256 checksum for JIRA install | String | auto-detected (see attributes/default.rb)
+checksum | SHA256 checksum for JIRA install | String | auto-detected by helper method
 context | URI context of installation (mainly for WAR installation) | String | auto-detected (see attributes/default.rb)
 context_path | Location of container server context configurations (for WAR installation) | String | auto-detected (see attributes/default.rb)
 home_path | home directory for JIRA | String | /var/atlassian/application-data/jira
@@ -69,8 +68,7 @@ install_path | location to install JIRA | String | /opt/atlassian/jira
 install_type | JIRA install type - "installer", "standalone", "war" | String | installer
 init_type | JIRA init service type - "sysv" | String | sysv
 lib_path | location of container server libraries | String | auto-detected (see attributes/default.rb)
-url_base | URL base for JIRA install | String | http://www.atlassian.com/software/jira/downloads/binary/atlassian-jira
-url | URL for JIRA install | String | auto-detected (see attributes/default.rb)
+url | URL for JIRA install | String | auto-detected by helper method
 user | user running JIRA (jira for installer/standalone, container server user for WAR installation) | String | auto-detected (see attributes/default.rb)
 version | JIRA version to install | String | 6.1.5
 
@@ -103,7 +101,6 @@ Attribute | Description | Type | Default
 host | FQDN or "localhost" (localhost automatically installs `['database']['type']` server in default recipe) | String | localhost
 name | JIRA database name | String | jira
 password | JIRA database user password | String | changeit
-port | JIRA database port | Fixnum | 3306
 type | JIRA database type - "mssql", "mysql", or "postgresql" | String | mysql
 user | JIRA database user | String | jira
 

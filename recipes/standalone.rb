@@ -40,10 +40,10 @@ directory ark_prefix_path do
 end
 
 ark 'jira' do
-  url node['jira']['url']
+  url jira_artifact_url
   prefix_root ark_prefix_path
   prefix_home ark_prefix_path
-  checksum node['jira']['checksum']
+  checksum jira_artifact_checksum
   version node['jira']['version']
   owner node['jira']['user']
   group node['jira']['user']
